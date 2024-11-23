@@ -1,4 +1,4 @@
-package com.example;
+/* package com.example;
 
 import com.example.Entidad.Cliente;
 
@@ -45,4 +45,54 @@ public class Main {
         em.close();
         return cliente;
     }
+} */
+
+package com.example;
+
+import com.example.Entidad.Producto;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+public class Main {
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("miUnidadPersistencia");
+
+    public static void main(String[] args) {
+        // Registrar un nuevo producto
+        registrarProducto("samsungA50", 750.50, 10);
+
+        Producto producto = consultarProducto(1L);
+        if (producto != null) {
+            System.out.println("Producto encontrado:");
+            System.out.println("Nombre: " + producto.getNombre());
+            System.out.println("Precio: " + producto.getPrecio());
+            System.out.println("Cantidad en Stock: " + producto.getCantidadEnStock());
+        } else {
+            System.out.println("Producto no encontrado.");
+        }
+
+        emf.close();
+    }
+
+    public static void registrarProducto(String nombre, double precio, int cantidadEnStock) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Producto producto = new Producto();
+        producto.setNombre(nombre);
+        producto.setPrecio(precio);
+        producto.setCantidadEnStock(cantidadEnStock);
+        em.persist(producto);
+        em.getTransaction().commit();
+        em.close();
+        System.out.println("Producto registrado con éxito.");
+    }
+
+    public static Producto consultarProducto(Long id) {
+        EntityManager em = emf.createEntityManager();
+        Producto producto = em.find(Producto.class, id);
+        em.close();
+        return producto;
+    }
 }
+

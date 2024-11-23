@@ -1,4 +1,4 @@
-/* package com.example.Entidad;
+package com.example.Entidad;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,15 +6,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Cliente {
+public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    private String email;
-    private String telefono;
+    private double precio;
+    private int cantidadEnStock;
 
-    public Cliente() {
+    public Producto() {
     }
 
     public Long getId() {
@@ -33,20 +33,20 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public String getEmail() {
-        return email;
+    public double getPrecio() {
+        return precio;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public int getCantidadEnStock() {
+        return cantidadEnStock;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setCantidadEnStock(int cantidadEnStock) {
+        this.cantidadEnStock = cantidadEnStock;
     }
 }
- */
+
