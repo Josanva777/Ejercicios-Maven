@@ -1,4 +1,3 @@
-
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
@@ -6,11 +5,11 @@
              version="2.1">
     <persistence-unit name="miUnidadPersistencia" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>com.tuPaquete.TuEntidad</class>
+        <class>com.example.Entidad.Libro</class>
 
         <properties>
             <!-- Configuración de la conexión a la base de datos -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pruebajpa"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ejerciciosmaven"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.password" value=""/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
