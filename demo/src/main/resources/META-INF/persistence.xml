@@ -5,16 +5,14 @@
              version="2.1">
     <persistence-unit name="miUnidadPersistencia" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>com.example.Entidad.Libro</class>
+        <class>com.example.Entidad.Cliente</class>
 
         <properties>
-            <!-- Configuración de la conexión a la base de datos -->
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ejerciciosmaven"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.password" value=""/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 
-            <!-- Configuración de Hibernate -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
@@ -22,3 +20,4 @@
         </properties>
     </persistence-unit>
 </persistence>
+

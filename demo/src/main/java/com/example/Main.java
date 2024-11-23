@@ -1,6 +1,7 @@
 package com.example;
 
-import com.example.Entidad.Libro;
+import com.example.Entidad.Cliente;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -9,56 +10,39 @@ public class Main {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("miUnidadPersistencia");
 
     public static void main(String[] args) {
-        crearLibro("El Quijote", "Miguel de Cervantes", 1605);
-        Libro libro = leerLibro(1L);
-        if (libro != null) {
-            System.out.println("Libro encontrado: " + libro.getTitulo());
+        // Registrar un nuevo cliente
+        registrarCliente("Johan Sanchez", "johan.sanchez@example.com", "123456789");
+        
+        Cliente cliente = consultarCliente(1L); 
+        if (cliente != null) {
+            System.out.println("Cliente encontrado:");
+            System.out.println("Nombre: " + cliente.getNombre());
+            System.out.println("Email: " + cliente.getEmail());
+            System.out.println("Teléfono: " + cliente.getTelefono());
+        } else {
+            System.out.println("Cliente no encontrado.");
         }
-        actualizarLibro(1L, "Don Quijote de la Mancha", "Miguel de Cervantes Saavedra");
-        eliminarLibro(1L);
+
         emf.close();
     }
 
-    public static void crearLibro(String titulo, String autor, int anioPublicacion) {
+    public static void registrarCliente(String nombre, String email, String telefono) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Libro libro = new Libro();
-        libro.setTitulo(titulo);
-        libro.setAutor(autor);
-        libro.setAnioPublicacion(anioPublicacion);
-        em.persist(libro);
+        Cliente cliente = new Cliente();
+        cliente.setNombre(nombre);
+        cliente.setEmail(email);
+        cliente.setTelefono(telefono);
+        em.persist(cliente);
         em.getTransaction().commit();
         em.close();
+        System.out.println("Cliente registrado con éxito.");
     }
 
-    public static Libro leerLibro(Long id) {
+    public static Cliente consultarCliente(Long id) {
         EntityManager em = emf.createEntityManager();
-        Libro libro = em.find(Libro.class, id);
+        Cliente cliente = em.find(Cliente.class, id);
         em.close();
-        return libro;
-    }
-
-    public static void actualizarLibro(Long id, String nuevoTitulo, String nuevoAutor) {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Libro libro = em.find(Libro.class, id);
-        if (libro != null) {
-            libro.setTitulo(nuevoTitulo);
-            libro.setAutor(nuevoAutor);
-            em.merge(libro);
-        }
-        em.getTransaction().commit();
-        em.close();
-    }
-
-    public static void eliminarLibro(Long id) {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Libro libro = em.find(Libro.class, id);
-        if (libro != null) {
-            em.remove(libro);
-        }
-        em.getTransaction().commit();
-        em.close();
+        return cliente;
     }
 }
